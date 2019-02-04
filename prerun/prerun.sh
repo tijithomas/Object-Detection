@@ -1,4 +1,7 @@
 set -e
+# Set the following ENV variables
+#export DATUM_PATH=/dir
+#export DATASET_NAME=data
 apt-get -y update 
 apt-get install -y git
 apt-get install -y python 
@@ -19,5 +22,5 @@ protoc object_detection/protos/*.proto --python_out=.
 export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
 python object_detection/dataset_tools/create_pet_tf_record.py \
     --label_map_path=object_detection/data/pet_label_map.pbtxt \
-    --data_dir=/dir/data \
-    --output_dir=/dir/data/TFRecords
+    --data_dir=$DATUM_PATH/$DATASET_NAME \
+    --output_dir=$DATUM_PATH?$DATASET_NAME/TFRecords
