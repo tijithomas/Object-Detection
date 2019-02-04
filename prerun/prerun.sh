@@ -19,7 +19,7 @@ pip install contextlib2
 pip install lxml
 pip install pillow
 protoc object_detection/protos/*.proto --python_out=.
-export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
+export PYTHONPATH=$PYTHONPATH:`pwd`
 python object_detection/dataset_tools/create_pet_tf_record.py \
     --label_map_path=object_detection/data/pet_label_map.pbtxt \
     --data_dir=$DATUM_PATH/$DATASET_NAME \
