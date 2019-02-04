@@ -1,11 +1,11 @@
 set -e
-#apt-get -y update 
-#apt-get install -y git
-#apt-get install -y python 
-#apt-get install  -y python-pip
-#pip install tensorflow
-#apt-get install -y protobuf-compiler
-#git clone https://github.com/tensorflow/models.git
+apt-get -y update 
+apt-get install -y git
+apt-get install -y python 
+apt-get install  -y python-pip
+pip install tensorflow
+apt-get install -y protobuf-compiler
+git clone https://github.com/tensorflow/models.git
 tar -xvf data.tar.gz
 tar -xvf data/images.tar.gz -C data
 tar -xvf data/annotations.tar.gz -C data
