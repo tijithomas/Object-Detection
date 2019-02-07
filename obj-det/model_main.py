@@ -61,7 +61,7 @@ DATUMS_PATH = os.getenv('DATUMS_PATH', None)
 DATASET_NAME = os.getenv('DATASET_NAME', None)
 MODEL_PATH = os.getenv('MODEL_PATH', None)
 MODEL_NAME = os.getenv('MODEL_NAME', None)
-OUTPUT_DIR = os.getenv('OUTPUT_DIR', None)
+OUTPUT_DIR = os.getenv('OUT_DIR', None)
 
 def extract_dataset():
   DATA_DIR = "{}/{}".format(DATUMS_PATH, DATASET_NAME)
