@@ -65,7 +65,7 @@ OUTPUT_DIR = os.getenv('OUT_DIR', None)
 
 def extract_dataset():
   DATA_DIR = "{}/{}".format(DATUMS_PATH, DATASET_NAME)
-  print ("ENV, EXPORT_DIR:{}, DATA_DIR:{}".format(FLAGS.model_dir, DATA_DIR))
+  print ("ENV, EXPORT_DIR:{}, DATA_DIR:{}".format(OUTPUT_DIR, DATA_DIR))
   EXTRACT_PATH = "/tmp/object-detection"
   TAR_FILE = DATA_DIR + "/TFRecords.tar.gz"
   if os.path.exists(TAR_FILE):
