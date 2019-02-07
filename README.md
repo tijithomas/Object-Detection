@@ -13,7 +13,7 @@ How to update the config file with env variables?
  3. Label map
  
  export HYPERPARAM_PATH=./
- export DATUM PATH=/dir
+ export DATUM_PATH=/dir
  export DATASET_NAME=data
  export MODEL_DIR=/dir/faster_rcnn_resnet101_coco_11_06_2017
  export OUT_DIR=/dir/MODEL
