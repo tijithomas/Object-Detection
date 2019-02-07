@@ -95,6 +95,7 @@ def main(unused_argv):
   flags.mark_flag_as_required('pipeline_config_path')
   
   #create output directory if it doesn't exist
+  print(FLAGS.model_dir)
   if not os.path.isdir(FLAGS.model_dir):
     os.makedirs(FLAGS.model_dir)
 
