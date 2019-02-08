@@ -62,6 +62,7 @@ DATASET_NAME = os.getenv('DATASET_NAME', None)
 MODEL_PATH = os.getenv('MODEL_PATH', None)
 MODEL_NAME = os.getenv('MODEL_NAME', None)
 OUTPUT_DIR = os.getenv('OUT_DIR', None)
+print("Output directory", OUTPUT_DIR)
 
 def extract_dataset():
   DATA_DIR = "{}/{}".format(DATUMS_PATH, DATASET_NAME)
@@ -107,7 +108,7 @@ def main(unused_argv):
   PIPELINE_CONFIG_PATH = "/tmp/object-detection/pipeline.config" 
   with open(PIPELINE_CONFIG_PATH, "w") as f:
     f.write(newText)
-  
+  OUTPUT_DIR = "/tmp/object-detection/output"
   config = tf.estimator.RunConfig(model_dir=OUTPUT_DIR)
 
   train_and_eval_dict = model_lib.create_estimator_and_inputs(
