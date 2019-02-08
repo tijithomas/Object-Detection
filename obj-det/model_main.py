@@ -108,7 +108,7 @@ def main(unused_argv):
   PIPELINE_CONFIG_PATH = "/tmp/object-detection/pipeline.config" 
   with open(PIPELINE_CONFIG_PATH, "w") as f:
     f.write(newText)
-  OUTPUT_DIR = "/tmp/object-detection/output"
+
   config = tf.estimator.RunConfig(model_dir=OUTPUT_DIR)
 
   train_and_eval_dict = model_lib.create_estimator_and_inputs(
