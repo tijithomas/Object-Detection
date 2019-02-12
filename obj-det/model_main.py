@@ -63,6 +63,7 @@ MODEL_PATH = os.getenv('MODEL_PATH', None)
 MODEL_NAME = os.getenv('MODEL_NAME', None)
 OUTPUT_DIR = os.getenv('OUT_DIR', None)
 print("Output directory", OUTPUT_DIR)
+summary_interval=1
 
 def extract_dataset():
   DATA_DIR = "{}/{}".format(DATUMS_PATH, DATASET_NAME)
@@ -108,8 +109,8 @@ def main(unused_argv):
   PIPELINE_CONFIG_PATH = "/tmp/object-detection/pipeline.config" 
   with open(PIPELINE_CONFIG_PATH, "w") as f:
     f.write(newText)
-  OUTPUT_DIR = "/tmp/object-detection/output"
-  config = tf.estimator.RunConfig(model_dir=OUTPUT_DIR)
+
+  config = tf.estimator.RunConfig(model_dir=OUTPUT_DIR, save_summary_steps=summary_interval, save_checkpoints_steps=summary_interval)
 
   train_and_eval_dict = model_lib.create_estimator_and_inputs(
       run_config=config,
@@ -157,4 +158,5 @@ def main(unused_argv):
 
 
 if __name__ == '__main__':
+  tf.logging.set_verbosity(tf.logging.INFO)
   tf.app.run()
