@@ -1,4 +1,5 @@
 #!/bin/bash
+export S3_REQUEST_TIMEOUT_MSEC=60000
 DATA_DIR="${DATUMS_PATH}/${DATASET_NAME}"
 MODEL_DIR="${MODEL_PATH}/${MODEL_NAME}"
 DATA_EXTRACT_PATH="/tmp/object-detection/TFRecords"
