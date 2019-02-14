@@ -102,25 +102,24 @@ def main(unused_argv):
   #extract pretrained model
   PRETRAINED_MODEL_DIR = extract_pretrained_model()
   
-  #update config file with pretarined model and data path
+  '''#update config file with pretarined model and data path
   with open(FLAGS.pipeline_config_path) as f:
     newText=f.read().replace('MODEL_PATH', PRETRAINED_MODEL_DIR).replace('DATA_PATH', DATA_DIR)
 
   PIPELINE_CONFIG_PATH = "/tmp/object-detection/pipeline.config" 
   with open(PIPELINE_CONFIG_PATH, "w") as f:
-    f.write(newText)
+    f.write(newText)'''
 
   config = tf.estimator.RunConfig(model_dir=OUTPUT_DIR, save_summary_steps=summary_interval, save_checkpoints_steps=summary_interval)
 
   train_and_eval_dict = model_lib.create_estimator_and_inputs(
       run_config=config,
       hparams=model_hparams.create_hparams(FLAGS.hparams_overrides),
-      pipeline_config_path=PIPELINE_CONFIG_PATH,
+      pipeline_config_path=FLAGS.pipeline_config_path,
       train_steps=FLAGS.num_train_steps,
       sample_1_of_n_eval_examples=FLAGS.sample_1_of_n_eval_examples,
       sample_1_of_n_eval_on_train_examples=(
           FLAGS.sample_1_of_n_eval_on_train_examples))
-  print(train_and_eval_dict)
   estimator = train_and_eval_dict['estimator']
   train_input_fn = train_and_eval_dict['train_input_fn']
   eval_input_fns = train_and_eval_dict['eval_input_fns']
