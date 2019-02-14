@@ -1,8 +1,8 @@
 #!/bin/bash
 DATA_DIR="${DATUMS_PATH}/${DATASET_NAME}"
 MODEL_DIR="${MODEL_PATH}/${MODEL_NAME}"
-DATA_EXTRACT_PATH="/tmp/object-detection/TFRecords"
-MODEL_EXTRACT_PATH="/tmp/object-detection/Model"
+DATA_EXTRACT_PATH="/tmp/object-detection"
+MODEL_EXTRACT_PATH="/tmp/object-detection"
 mkdir -p $DATA_EXTRACT_PATH
 mkdir -p $MODEL_EXTRACT_PATH
 #extract datasets
