@@ -57,15 +57,15 @@ flags.DEFINE_boolean(
 )
 FLAGS = flags.FLAGS
 
-DATUMS_PATH = os.getenv('DATUMS_PATH', None)
+'''DATUMS_PATH = os.getenv('DATUMS_PATH', None)
 DATASET_NAME = os.getenv('DATASET_NAME', None)
 MODEL_PATH = os.getenv('MODEL_PATH', None)
-MODEL_NAME = os.getenv('MODEL_NAME', None)
+MODEL_NAME = os.getenv('MODEL_NAME', None)'''
 OUTPUT_DIR = os.getenv('OUT_DIR', None)
 print("Output directory", OUTPUT_DIR)
 summary_interval=1
 
-def extract_dataset():
+'''def extract_dataset():
   DATA_DIR = "{}/{}".format(DATUMS_PATH, DATASET_NAME)
   print ("ENV, EXPORT_DIR:{}, DATA_DIR:{}".format(OUTPUT_DIR, DATA_DIR))
   EXTRACT_PATH = "/tmp/object-detection"
@@ -91,16 +91,16 @@ def extract_pretrained_model():
     tar.close()
     print("Pretrained model successfuly extracted")
     MODEL_DIR = EXTRACT_PATH + "/faster_rcnn_resnet101_coco_11_06_2017"  
-  return MODEL_DIR 
+  return MODEL_DIR '''
 
 def main(unused_argv):
   flags.mark_flag_as_required('pipeline_config_path')
 
   #extract dataset 
-  DATA_DIR = extract_dataset()
+  #DATA_DIR = extract_dataset()
 
   #extract pretrained model
-  PRETRAINED_MODEL_DIR = extract_pretrained_model()
+  #PRETRAINED_MODEL_DIR = extract_pretrained_model()
   
   '''#update config file with pretarined model and data path
   with open(FLAGS.pipeline_config_path) as f:
