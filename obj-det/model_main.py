@@ -61,9 +61,9 @@ FLAGS = flags.FLAGS
 DATASET_NAME = os.getenv('DATASET_NAME', None)
 MODEL_PATH = os.getenv('MODEL_PATH', None)
 MODEL_NAME = os.getenv('MODEL_NAME', None)'''
-OUTPUT_DIR = os.getenv('OUT_DIR', None)
-print("Output directory", OUTPUT_DIR)
-summary_interval=1
+#OUTPUT_DIR = os.getenv('OUT_DIR', None)
+#print("Output directory", OUTPUT_DIR)
+#summary_interval=1
 
 '''def extract_dataset():
   DATA_DIR = "{}/{}".format(DATUMS_PATH, DATASET_NAME)
@@ -95,7 +95,7 @@ def extract_pretrained_model():
 
 def main(unused_argv):
   flags.mark_flag_as_required('pipeline_config_path')
-
+  flags.mark_flag_as_required('model_dir')
   #extract dataset 
   #DATA_DIR = extract_dataset()
 
@@ -110,7 +110,7 @@ def main(unused_argv):
   with open(PIPELINE_CONFIG_PATH, "w") as f:
     f.write(newText)'''
 
-  config = tf.estimator.RunConfig(model_dir=OUTPUT_DIR, save_summary_steps=summary_interval, save_checkpoints_steps=summary_interval)
+  config = tf.estimator.RunConfig(model_dir=FLAGS.model_dir)
 
   train_and_eval_dict = model_lib.create_estimator_and_inputs(
       run_config=config,
