@@ -26,6 +26,8 @@ import os
 
 from object_detection import model_hparams
 from object_detection import model_lib
+from object_detection import exporter
+from object_detection.protos import pipeline_pb2
 
 flags.DEFINE_string(
     'model_dir', None, 'Path to output model directory '
@@ -57,59 +59,10 @@ flags.DEFINE_boolean(
 )
 FLAGS = flags.FLAGS
 
-'''DATUMS_PATH = os.getenv('DATUMS_PATH', None)
-DATASET_NAME = os.getenv('DATASET_NAME', None)
-MODEL_PATH = os.getenv('MODEL_PATH', None)
-MODEL_NAME = os.getenv('MODEL_NAME', None)'''
-#OUTPUT_DIR = os.getenv('OUT_DIR', None)
-#print("Output directory", OUTPUT_DIR)
-#summary_interval=1
-
-'''def extract_dataset():
-  DATA_DIR = "{}/{}".format(DATUMS_PATH, DATASET_NAME)
-  print ("ENV, EXPORT_DIR:{}, DATA_DIR:{}".format(OUTPUT_DIR, DATA_DIR))
-  EXTRACT_PATH = "/tmp/object-detection"
-  TAR_FILE = DATA_DIR + "/TFRecords.tar.gz"
-  if os.path.exists(TAR_FILE):
-    print("Extracting compressed training data...")
-    tar = tarfile.open(TAR_FILE)
-    tar.extractall(EXTRACT_PATH)
-    tar.close()
-    print("Training data successfuly extracted")
-    DATA_DIR = EXTRACT_PATH + "/TFRecords"  
-  return DATA_DIR  
- 
-def extract_pretrained_model():
-  MODEL_DIR = "{}/{}".format(MODEL_PATH, MODEL_NAME)
-  print ("ENV, MODEL_DIR:{}".format(MODEL_DIR))
-  EXTRACT_PATH = "/tmp/object-detection"
-  TAR_FILE = MODEL_DIR + "/faster_rcnn_resnet101_coco_11_06_2017.tar.gz"
-  if os.path.exists(TAR_FILE):
-    print("Extracting compressed pretrained model...")
-    tar = tarfile.open(TAR_FILE)
-    tar.extractall(EXTRACT_PATH)
-    tar.close()
-    print("Pretrained model successfuly extracted")
-    MODEL_DIR = EXTRACT_PATH + "/faster_rcnn_resnet101_coco_11_06_2017"  
-  return MODEL_DIR '''
-
 def main(unused_argv):
   flags.mark_flag_as_required('pipeline_config_path')
   flags.mark_flag_as_required('model_dir')
-  #extract dataset 
-  #DATA_DIR = extract_dataset()
-
-  #extract pretrained model
-  #PRETRAINED_MODEL_DIR = extract_pretrained_model()
   
-  '''#update config file with pretarined model and data path
-  with open(FLAGS.pipeline_config_path) as f:
-    newText=f.read().replace('MODEL_PATH', PRETRAINED_MODEL_DIR).replace('DATA_PATH', DATA_DIR)
-
-  PIPELINE_CONFIG_PATH = "/tmp/object-detection/pipeline.config" 
-  with open(PIPELINE_CONFIG_PATH, "w") as f:
-    f.write(newText)'''
-
   config = tf.estimator.RunConfig(model_dir=FLAGS.model_dir)
 
   train_and_eval_dict = model_lib.create_estimator_and_inputs(
@@ -155,6 +108,21 @@ def main(unused_argv):
     # Currently only a single Eval Spec is allowed.
     tf.estimator.train_and_evaluate(estimator, train_spec, eval_specs[0])
 
+
+    # Export the model
+    pipeline_config = pipeline_pb2.TrainEvalPipelineConfig()
+    with tf.gfile.GFile(FLAGS.pipeline_config_path, 'r') as f:
+        text_format.Merge(f.read(), pipeline_config)
+    input_shape = None
+    input_type = 'image_tensor'
+    export_dir = FLAGS.model_dir + '/inference'
+    trained_checkpoint_prefix = tf.train.latest_checkpoint(FLAGS.model_dir, latest_filename=None)
+    exporter.export_inference_graph(
+            input_type, pipeline_config,
+            trained_checkpoint_prefix,
+            export_dir,
+            input_shape=input_shape, 
+            write_inference_graph=false)
 
 if __name__ == '__main__':
   tf.logging.set_verbosity(tf.logging.INFO)
