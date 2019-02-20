@@ -28,6 +28,7 @@ from object_detection import model_hparams
 from object_detection import model_lib
 from object_detection import exporter
 from object_detection.protos import pipeline_pb2
+from google.protobuf import text_format
 
 flags.DEFINE_string(
     'model_dir', None, 'Path to output model directory '
