@@ -123,7 +123,7 @@ def main(unused_argv):
             trained_checkpoint_prefix,
             export_dir,
             input_shape=input_shape, 
-            write_inference_graph=false)
+            write_inference_graph=False)
 
 if __name__ == '__main__':
   tf.logging.set_verbosity(tf.logging.INFO)
