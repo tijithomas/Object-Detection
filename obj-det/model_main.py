@@ -112,7 +112,6 @@ def main(unused_argv):
 
 
     # Export the model
-    estimator.export_savedmodel(FLAGS.model_dir, input_fn)
     pipeline_config = pipeline_pb2.TrainEvalPipelineConfig()
     with tf.gfile.GFile(FLAGS.pipeline_config_path, 'r') as f:
         text_format.Merge(f.read(), pipeline_config)
