@@ -111,6 +111,11 @@ def main(unused_argv):
 
 
     # Export the model
+    image = tf.placeholder(tf.uint8, [None, None, None, 3])
+    input_fn = tf.estimator.export.build_raw_serving_input_receiver_fn({
+        'image': image,
+    })
+    estimator.export_savedmodel(FLAGS.model_dir, input_fn)
 '''    pipeline_config = pipeline_pb2.TrainEvalPipelineConfig()
     with tf.gfile.GFile(FLAGS.pipeline_config_path, 'r') as f:
         text_format.Merge(f.read(), pipeline_config)
@@ -125,11 +130,6 @@ def main(unused_argv):
             input_shape=input_shape, 
             write_inference_graph=False)
 '''
-    image = tf.placeholder(tf.uint8, [None, None, None, 3])
-    input_fn = tf.estimator.export.build_raw_serving_input_receiver_fn({
-        'image': image,
-    })
-    estimator.export_savedmodel(FLAGS.model_dir, input_fn)
 if __name__ == '__main__':
   tf.logging.set_verbosity(tf.logging.INFO)
   tf.app.run()
