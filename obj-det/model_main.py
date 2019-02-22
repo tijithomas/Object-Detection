@@ -23,7 +23,6 @@ from absl import flags
 import tensorflow as tf
 import tarfile
 import os
-import shutil
 
 from object_detection import model_hparams
 from object_detection import model_lib
@@ -125,7 +124,9 @@ def main(unused_argv):
             export_dir,
             input_shape=input_shape, 
             write_inference_graph=False)
-    shutil.move(FLAGS.model_dir+'/inference/saved_model', FLAGS.model_dir+'/1')
+    #TF Object detection saves the model without version. But tesnorflow model server needs versioned
+    #saved models for serving. So copy the saved model to version folder.
+    tf.gfile.Rename(FLAGS.model_dir+'/inference/saved_model', FLAGS.model_dir+'/1')
 
 if __name__ == '__main__':
   tf.logging.set_verbosity(tf.logging.INFO)
