@@ -148,7 +148,7 @@ def main(_):
   #TF Object detection saves the model without version. But tesnorflow model server needs versioned
   #saved models for serving. So copy the saved model to version folder.
   tf.gfile.Rename(FLAGS.output_directory+'saved_model', FLAGS.output_directory+'/1')
-  with tf.gfile.GFile(FLAGS.utput_directory+'/1/variables/Dummy', 'w') as file:
+  with tf.gfile.GFile(FLAGS.output_directory+'/1/variables/Dummy', 'w') as file:
       file.write("dummy file")
 
 
