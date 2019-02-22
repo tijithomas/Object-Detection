@@ -126,10 +126,10 @@ def main(unused_argv):
             write_inference_graph=False)
     #TF Object detection saves the model without version. But tesnorflow model server needs versioned
     #saved models for serving. So copy the saved model to version folder.
-    #x = tf.gfile.ListDirectory(FLAGS.model_dir+'/export/Servo/')
-    #tf.gfile.Rename(FLAGS.model_dir+'/export/Servo/'+x[0], FLAGS.model_dir+'/1')
-    tf.gfile.Rename(FLAGS.model_dir+'/inference/saved_model', FLAGS.model_dir+'/inference/1')
-    #tf.gfile.DeleteRecursively(FLAGS.model_dir+'/export')
+    tf.gfile.Rename(FLAGS.model_dir+'/inference/saved_model', FLAGS.model_dir+'/1')
+    tf.gfile.DeleteRecursively(FLAGS.model_dir+'/export')
+    with tf.gfile.GFile('./.Dummy', 'w') as file:
+        file.write("dummy file")
 
 if __name__ == '__main__':
   tf.logging.set_verbosity(tf.logging.INFO)
