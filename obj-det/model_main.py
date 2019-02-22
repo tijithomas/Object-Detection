@@ -128,7 +128,7 @@ def main(unused_argv):
     #saved models for serving. So copy the saved model to version folder.
     tf.gfile.Rename(FLAGS.model_dir+'/inference/saved_model', FLAGS.model_dir+'/1')
     tf.gfile.DeleteRecursively(FLAGS.model_dir+'/export')
-    with tf.gfile.GFile('./.Dummy', 'w') as file:
+    with tf.gfile.GFile(FLAGS.model_dir+'/1/Dummy', 'w') as file:
         file.write("dummy file")
 
 if __name__ == '__main__':
