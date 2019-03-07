@@ -1,5 +1,5 @@
 #!/bin/bash
-DATA_DIR="${DATUMS_PATH}/${DATASET_NAME}"
+DATA_DIR="${DATUMS_PATH}/${DATASET_NAME}/TFR"
 MODEL_DIR="${MODEL_PATH}/${MODEL_NAME}"
 cp  $HYPERPARAMS_JSON_FILEPATH $HOME/pipeline.config
 echo "Confg file path : $HOME/pipeline.config"
