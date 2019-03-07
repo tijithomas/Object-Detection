@@ -1,13 +1,17 @@
 #!/bin/bash
-DATA_DIR="${DATUMS_PATH}/${DATASET_NAME}/TFR"
+DATA_DIR="${DATUMS_PATH}/${DATASET_NAME}/"
 MODEL_DIR="${MODEL_PATH}/${MODEL_NAME}"
 cp  ./pipeline.config $HOME/pipeline.config
 echo "Confg file path : $HOME/pipeline.config"
 
-if [ $# -ne 1 ]; then
-    echo "Usage : bash process.sh <c/n>"
+if [ $# -ne 2 ]; then
+    echo "Usage : bash process.sh <c/n> <data_path>"
     exit 1
-elif [ $1 = "n" ]; then
+fi
+
+DATA_DIR="${DATA_DIR}/${2}"
+echo $DATA_DIR
+if [ $1 = "n" ]; then
 	sed -i "s|DATA_PATH|"${DATA_DIR}"|g" $HOME/pipeline.config
 	sed -i "s|MODEL_PATH|"${MODEL_DIR}"|g" $HOME/pipeline.config
 elif [ $1 = "c" ]; then
