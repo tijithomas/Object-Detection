@@ -1,11 +1,17 @@
-import six.moves.urllib as urllib
 import os
-import tensorflow as tf
+import tarfile
 
 OUTPUT_DIR = os.getenv('OUT_DIR', None)
-opener = urllib.request.URLopener()
-opener.retrieve("http://www.robots.ox.ac.uk/~vgg/data/pets/data/annotations.tar.gz", "./annotations.tar.gz")
-opener.retrieve("http://www.robots.ox.ac.uk/~vgg/data/pets/data/images.tar.gz", "./images.tar.gz")
-tf.gfile.Copy("./annotations.tar.gz", OUTPUT_DIR + "/annotations.tar.gz")
-tf.gfile.Copy("./images.tar.gz", OUTPUT_DIR + "/images.tar.gz")
-print("Saved in", OUTPUT_DIR)
+target_dir = OUTPUT_DIR + 'TFRecords'
+output_dir = "./"
+
+def compress():
+	tf = tarfile.open(target_dir+"TFRecords.tar.gz", mode="w:gz")
+	for filename in os.listdir(output_dir):
+		if "pet_faces_train.record" in filename or "pet_faces_val.record" in filename:
+			tf.add(output_dir+'/'+filename, arcname='TFRecords/'+filename)
+	tf.close()
+	print("TFRecods compressed and saved")
+
+if __name__ == '__main__':
+	compress()
