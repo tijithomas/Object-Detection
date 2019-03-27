@@ -3,7 +3,7 @@ import os
 import tarfile
 
 OUTPUT_DIR = os.getenv('OUT_DIR', None)
-target_dir = '/tmp/dataset/'
+target_dir = '/tmp/dataset'
 
 def download():
 	opener = urllib.request.URLopener()
@@ -12,6 +12,8 @@ def download():
 	print("Downloaded and saved the dataset: Location: ", target_dir)
 
 if __name__ == '__main__':
+	if not (os.path.exists(target_dir)):
+		os.mkdir(target_dir)
 	download()
 	for filename in os.listdir(target_dir):
         	tar = tarfile.open(target_dir + '/' + filename)
