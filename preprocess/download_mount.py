@@ -19,5 +19,4 @@ if __name__ == '__main__':
         	tar = tarfile.open(target_dir + '/' + filename)
         	tar.extractall(OUTPUT_DIR)
         	tar.close()
-    	print("Extracted objects and stored. Location: ", OUTPUT_DIR)
-	
+    	print("Extracted objects and stored. Location: ", OUTPUT_DIR)	
