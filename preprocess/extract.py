@@ -1,7 +1,10 @@
 import os
 import tarfile
 
-DATA_DIR = os.getenv("OUT_DIR", None)
+DATUMS_PATH = os.getenv("DATUMS_PATH", None)
+DATASET_NAME = os.getenv("DATASET_NAME", None)
+
+DATA_DIR = os.path.join(DATUMS_PATH, DATASET_NAME)
 target_dir = '/tmp/dataset/'
 
 def extract():
