@@ -28,4 +28,4 @@ for file in $MODEL_DIR/*; do
 	done
 
 #Set the model path in pipeline.config file to the extracted path
-sed -i "s|MODEL_PATH|"${EXTRACT_PATH}"|g" $HOME/pipeline.config
+sed -i "s|MODEL_PATH|"${EXTRACT_PATH}"|g" ./pipeline.config
