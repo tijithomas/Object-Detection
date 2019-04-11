@@ -5,7 +5,7 @@ if [ $# -ne 1 ]; then
     exit 1
 fi
 
-echo "Confg file path : $1
+echo "Confg file path : $1"
 
 DATA_DIR="${DATUMS_PATH}/${DATASET_NAME}"
 MODEL_DIR="${MODEL_PATH}/${MODEL_NAME}"
